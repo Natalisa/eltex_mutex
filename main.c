@@ -12,7 +12,7 @@ int shop[count_shop];
 struct a{
     int name;
     int amt;
-} client[2];
+} client[count_client];
 
 void* thread_func(void *arg){
     int cl = *((int*)arg);
@@ -24,8 +24,7 @@ void* thread_func(void *arg){
                 client[cl].amt = abs(shop[index]);
                 shop[index] = 0;
             } else client[cl].amt = 0;
-            printf("К %d м %d ост %d\n",\
-                    cl,index,shop[index]);
+            printf("К %d м %d ост %d\n", cl,index,shop[index]);
             pthread_mutex_unlock(&mutex[index]);
             if(client[cl].amt == 0){
                 client[cl].amt = rand()%20+10;
